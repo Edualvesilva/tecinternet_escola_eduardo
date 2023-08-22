@@ -154,4 +154,45 @@ SELECT alunos.nome as Alunos,cursos.titulo as Curso
 FROM alunos INNER JOIN cursos ON alunos.Cursos_id = cursos.id
 GROUP BY alunos.nome;
 ```
-###
+### Desafios
+1. Criar uma consulta que calcule a idade do aluno
+
+```sql
+ SELECT
+    nome as Aluno,
+    DataNascimento,
+    YEAR(CURDATE()) - YEAR(DataNascimento) - (RIGHT(CURDATE(), 5) < RIGHT(DataNascimento, 5)) as Idade
+FROM alunos;
+```
+
+2. Criar uma consulta que calcule a média das notas de cada aluno e mostre somente os alunos que tiveram a média maior ou igual a 7.
+
+```sql
+SELECT
+    alunos.nome AS Aluno,
+    ROUND(AVG((alunos.PrimeiraNota + alunos.SegundaNota) / 2), 2) AS Media
+FROM alunos
+GROUP BY alunos.nome
+HAVING Media > 7;
+```
+3. Criar uma consulta que calcule a média das notas de cada aluno e mostre somente os alunos que tiveram a média menor que 7.
+
+```sql
+SELECT
+    alunos.nome AS Aluno,
+    ROUND(AVG((alunos.PrimeiraNota + alunos.SegundaNota) / 2), 2) AS Media
+FROM alunos
+GROUP BY alunos.nome
+HAVING Media < 7;
+```
+
+4. Criar uma consulta que mostre a quantidade de alunos com média maior ou igual a 7.
+
+```sql
+SELECT
+    alunos.nome AS Aluno,
+    ROUND(AVG((alunos.PrimeiraNota + alunos.SegundaNota) / 2), 2) AS Media
+FROM alunos
+GROUP BY alunos.nome
+HAVING Media >= 7;
+```
